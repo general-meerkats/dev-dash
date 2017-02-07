@@ -50,8 +50,12 @@ a:hover {
 .col-1of3 {
     box-sizing: border-box;
     flex: 0 33.33333%;
-    overflow-y: auto;
+    overflow-y: hidden;
     padding: 0 10px;
+}
+
+.col-1of3:hover {
+    overflow-y: auto;
 }
 
 .col-1of3:nth-child(2) {
