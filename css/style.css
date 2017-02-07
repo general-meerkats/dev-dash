@@ -5,7 +5,11 @@ body {
 }
 
 body {
-    background: rgb(43, 92, 105);
+    background: rgb(43, 92, 105) url(../assets/001.jpg);
+    background-attachment: fixed;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: cover;
     color: white;
 }
 
