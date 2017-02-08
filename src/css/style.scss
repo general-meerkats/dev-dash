@@ -5,7 +5,7 @@ body {
 }
 
 body {
-    background: rgb(43, 92, 105) url(../dist/assets/006.jpg);
+    background: rgb(43, 92, 105) url(../assets/006.jpg);
     background-attachment: fixed;
     background-position: bottom center;
     background-repeat: no-repeat;
@@ -14,12 +14,12 @@ body {
 }
 
 a {
-    color: rgb(125, 194, 178);
+    color: rgb(69, 139, 123);
     text-decoration: none;
 }
 
 a:hover {
-    color: rgb(145, 214, 198);
+    color: rgb(175, 245, 229);
     text-decoration: underline;
 }
 
