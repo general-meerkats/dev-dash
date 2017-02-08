@@ -1,7 +1,7 @@
 /* jshint esversion:6 */
 /* globals $, document */
 
-var RenderFeature = (function () {
+var RenderTable = (function () {
 
     // cache DOM elements
     var $container = $('.container');

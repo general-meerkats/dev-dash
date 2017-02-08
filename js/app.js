@@ -62,7 +62,7 @@ $(document).ready(function () {
                 .map(prepareEvents);
         
         // call renderer
-        RenderFeature.render(commitEvents, todoEvents, mergeEvents);
+        RenderTable.render(commitEvents, todoEvents, mergeEvents);
         // RenderChart.render(commitEvents, todoEvents, mergeEvents);  // to do
     }
 
