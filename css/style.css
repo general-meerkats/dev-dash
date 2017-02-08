@@ -5,7 +5,7 @@ body {
 }
 
 body {
-    background: rgb(43, 92, 105) url(../assets/001.jpg);
+    background: rgb(43, 92, 105) url(../dist/assets/006.jpg);
     background-attachment: fixed;
     background-position: bottom center;
     background-repeat: no-repeat;
