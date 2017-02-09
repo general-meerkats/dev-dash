@@ -3,15 +3,20 @@
 
 var RenderTable = (function () {
 
+    var DOM = {};
+    
+    
     // cache DOM elements
-    var $container = $('.container');
-
+    function cacheDom() {
+        DOM.$container = $('.table-container');
+    }
+        
 
     // public render method calls category renderers if category has events
     function render(commitEvents, todoEvents, mergeEvents) {
 
         // clear previous results
-        $container.empty();
+        DOM.$container.empty();
 
         if (commitEvents.length > 0) {
             renderCommitEvents(commitEvents);
@@ -128,7 +133,7 @@ var RenderTable = (function () {
             .append(`<h3>${es.length} Commit-Related Events</h3>`)
             .append($list);
 
-        $container.append($column);
+        DOM.$container.append($column);
 
     }
 
@@ -239,7 +244,7 @@ var RenderTable = (function () {
             .append(`<h3>${es.length} Todo-Related Events</h3>`)
             .append($list);
 
-        $container.append($column);
+        DOM.$container.append($column);
 
     }
 
@@ -371,13 +376,20 @@ var RenderTable = (function () {
             .append(`<h3>${es.length} Merge-Related Events</h3>`)
             .append($list);
 
-        $container.append($column);
+        DOM.$container.append($column);
 
+    }
+    
+    
+    // public init method
+    function init() {
+        cacheDom();
     }
 
 
     // return public method
     return {
+        init: init,
         render: render
     };
 

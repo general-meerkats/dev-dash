@@ -9,9 +9,9 @@ $(document).ready(function () {
     
     // Greeter.init();  // todo
     
-    HitApi.getEvents();
+    HitApi.init();
     
-    RenderTable.render();
+    RenderTable.init();
 
     // RenderGraph.render();  // todo
 

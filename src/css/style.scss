@@ -27,18 +27,19 @@ a:hover {
     font-weight: bold;
 }
 
-.container {
+/* =========== tabular output =========== */
+.table-container {
     box-sizing: border-box;
     display: flex;
     flex-flow: row wrap;
     font-family: sans-serif;
-    font-size: 14px;
-    height: 312px;
-    justify-content: flex-end;
-    width: 100%;
+    font-size: 12px;
+    height: 285px;
+    margin: auto;
+    max-width: 1200px;
 }
 
-.container h3 {
+.table-container h3 {
     text-align: center;
 }
 
@@ -77,8 +78,8 @@ ul.col-list li {
 ul.col-list img {
     border-radius: 50%;
     flex: none;
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width:  45px;
 }
 
 ul.col-list p {
@@ -89,8 +90,20 @@ ul.col-list p {
 
 /* responsive boogers */
 
-@media all and (max-width: 1000px) {
-    .container {
+@media all and (min-width: 1080px) {
+    .table-container {
+        font-size: 14px;
+        height: 312px;
+    }
+    
+    ul.col-list img {
+        height: 50px;
+        width:  50px;
+    }
+}
+
+@media all and (max-width: 720px) {
+    .table-container {
         display: block;
         margin: 0 auto;
         max-width: 600px;

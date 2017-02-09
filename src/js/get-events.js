@@ -1,13 +1,21 @@
 /* jshint esversion:6 */
-/* globals $, document, console */
+/* globals $, document, console, RenderTable */
 
 var HitApi = (function () {
 
+    var DOM = {};
+    
+    
     // cache DOM elements
-    var $inputForm = $('#input-form');
+    function cacheDom() {
+        DOM.$inputForm = $('#input-form');
+    }
+    
 
     // bind events
-    $inputForm.submit(getEvents);
+    function bindEvents() {
+        DOM.$inputForm.submit(getEvents);
+    }
 
 
     // prepare events prior to calling renderers
@@ -34,7 +42,7 @@ var HitApi = (function () {
     
     // get github events
     function getEvents(e) {
-
+        
         e.preventDefault();
 
         var api = {
@@ -91,9 +99,16 @@ var HitApi = (function () {
     }
     
     
+    // public init method
+    function init() {
+        cacheDom();
+        bindEvents();
+    }
+    
+    
     // return public method
     return {
-        getEvents: getEvents
+        init: init
     };
 
 }());
