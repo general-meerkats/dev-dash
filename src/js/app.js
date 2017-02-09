@@ -7,7 +7,9 @@ $(document).ready(function () {
     
     // Backgrounds.init();  // todo
     
-    // Greeter.init();  // todo
+    RepoSelect.init();
+    
+    Greet.init();
     
     HitApi.init();
     

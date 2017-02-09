@@ -9,6 +9,7 @@ body {
   background-position: bottom center;
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: sans-serif;
   color: white; }
 
 a {
@@ -29,7 +30,6 @@ a:hover {
   display: flex;
   -ms-flex-flow: row wrap;
       flex-flow: row wrap;
-  font-family: sans-serif;
   font-size: 12px;
   height: 285px;
   margin: auto;
@@ -78,6 +78,23 @@ ul.col-list p {
   -ms-flex: 1 auto;
       flex: 1 auto;
   margin: 0 0 0 5px; }
+
+.repo-select {
+  cursor: pointer;
+  font-weight: bold; }
+
+.repo-list {
+  color: black;
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  background: white; }
+
+.repo-list ul {
+  list-style: none; }
+
+.hidden {
+  display: none; }
 
 /* responsive boogers */
 @media all and (min-width: 1080px) {
