@@ -22,20 +22,20 @@ a:hover {
 .bolder {
   font-weight: bold; }
 
-.container {
+/* =========== tabular output =========== */
+.table-container {
   box-sizing: border-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-flow: row wrap;
       flex-flow: row wrap;
   font-family: sans-serif;
-  font-size: 14px;
-  height: 312px;
-  -ms-flex-pack: end;
-      justify-content: flex-end;
-  width: 100%; }
+  font-size: 12px;
+  height: 285px;
+  margin: auto;
+  max-width: 1200px; }
 
-.container h3 {
+.table-container h3 {
   text-align: center; }
 
 .inputs {
@@ -71,8 +71,8 @@ ul.col-list img {
   border-radius: 50%;
   -ms-flex: none;
       flex: none;
-  height: 50px;
-  width: 50px; }
+  height: 45px;
+  width: 45px; }
 
 ul.col-list p {
   -ms-flex: 1 auto;
@@ -80,8 +80,16 @@ ul.col-list p {
   margin: 0 0 0 5px; }
 
 /* responsive boogers */
-@media all and (max-width: 1000px) {
-  .container {
+@media all and (min-width: 1080px) {
+  .table-container {
+    font-size: 14px;
+    height: 312px; }
+  ul.col-list img {
+    height: 50px;
+    width: 50px; } }
+
+@media all and (max-width: 720px) {
+  .table-container {
     display: block;
     margin: 0 auto;
     max-width: 600px;
