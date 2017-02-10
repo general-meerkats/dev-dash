@@ -43,13 +43,13 @@ var Backgrounds = (function() {
     // and then set the background image CSS on <body>
     function pickBackground() {
                 
-        // console.log(today, state);  // for diag
+         console.log(today, state);  // for diag
         
         var curntImgIndx = bgArr.indexOf(state.imgName),
             newImgIndex,
             newImgName;
         
-        if (today > state.date) {
+        if (new Date(today) > new Date(state.date)) {
             
             // find new image index
             newImgIndex = (curntImgIndx === 6) ? 1 : curntImgIndx + 1;
