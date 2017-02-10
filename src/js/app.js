@@ -5,7 +5,7 @@
 
 $(document).ready(function () {
     
-    // Backgrounds.init();  // todo
+    Backgrounds.init();
     
     RepoSelect.init();
     
