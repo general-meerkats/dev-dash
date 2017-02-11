@@ -1,5 +1,5 @@
 /* jshint esversion:6 */
-/* globals $, document, console, RenderTable */
+/* globals $, document, console, RenderTable, RenderChart */
 
 var HitApi = (function () {
 
@@ -59,7 +59,7 @@ var HitApi = (function () {
 
     // handle GH JSON response data
     function handleResponse(response) {
-
+        
         // we're splitting events into 3 categories, based on event type
         var commitTypes = ['PushEvent',
                            'CommitCommentEvent'
@@ -93,9 +93,13 @@ var HitApi = (function () {
                 .filter((e) => mergeTypes.indexOf(e.type) !== -1)
                 .map(prepareEvents);
         
+//        console.log('Commit types: ' + commitEvents.length);
+//        console.log('  Todo types: ' + todoEvents.length);
+//        console.log(' Merge types: ' + mergeEvents.length);
+        
         // call renderers
         RenderTable.render(commitEvents, todoEvents, mergeEvents);
-        // RenderGraph.render(commitEvents, todoEvents, mergeEvents);  // to do
+        RenderChart.render(response.map(prepareEvents));
     }
     
     

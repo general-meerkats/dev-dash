@@ -15,6 +15,6 @@ $(document).ready(function () {
     
     RenderTable.init();
 
-    // RenderGraph.render();  // todo
+    RenderChart.init();
 
 });
