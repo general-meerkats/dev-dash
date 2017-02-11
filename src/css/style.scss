@@ -113,16 +113,39 @@ ul.col-list p {
 /* chart output */
 
 .chart-container {
-    position: static;
-    border: 1px solid teal;
+    box-sizing: border-box;
+//    border: 1px solid teal;
     margin: 20px auto;
     max-width: 1200px;
 }
 
+.chart-line {
+    stroke: white;
+    stroke-width: 2;
+}
 
-circle {
-    fill: rgba(255, 255, 255, .8);
+.chart-circle {
+    fill: rgba(255, 255, 255, 1);
     stroke: none;
+}
+
+.labels.x-labels {
+    text-anchor: middle;
+}
+
+.labels.y-labels {
+   text-anchor: end;
+}
+
+.labels {
+    font-size: 12px;
+    fill: white;
+}
+
+.horiz-rule {
+   stroke: rgba(60, 60, 60, .3);
+   stroke-dasharray: 0;
+   stroke-width: 0.5px;
 }
 
 

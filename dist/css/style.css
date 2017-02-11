@@ -98,14 +98,32 @@ ul.col-list p {
 
 /* chart output */
 .chart-container {
-  position: static;
-  border: 1px solid teal;
+  box-sizing: border-box;
   margin: 20px auto;
   max-width: 1200px; }
 
-circle {
-  fill: rgba(255, 255, 255, 0.8);
+.chart-line {
+  stroke: white;
+  stroke-width: 2; }
+
+.chart-circle {
+  fill: white;
   stroke: none; }
+
+.labels.x-labels {
+  text-anchor: middle; }
+
+.labels.y-labels {
+  text-anchor: end; }
+
+.labels {
+  font-size: 12px;
+  fill: white; }
+
+.horiz-rule {
+  stroke: rgba(60, 60, 60, 0.3);
+  stroke-dasharray: 0;
+  stroke-width: 0.5px; }
 
 /* responsive boogers */
 @media all and (min-width: 1080px) {
