@@ -76,7 +76,7 @@ var Backgrounds = (function() {
     // render to DOM
     function render(imageName) {
         DOM.$body
-            .css('background-image', 'url(../dist/assets/' + imageName + '.jpg)');
+            .css('background-image', 'url(dist/assets/' + imageName + '.jpg)');
     }
     
     
