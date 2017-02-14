@@ -23,7 +23,7 @@ a:hover {
 .bolder {
   font-weight: bold; }
 
-/* =========== tabular output =========== */
+/* =========== table output =========== */
 .table-container {
   box-sizing: border-box;
   display: -ms-flexbox;
@@ -95,6 +95,35 @@ ul.col-list p {
 
 .hidden {
   display: none; }
+
+/* chart output */
+.chart-container {
+  box-sizing: border-box;
+  margin: 20px auto;
+  max-width: 1200px; }
+
+.chart-line {
+  stroke: white;
+  stroke-width: 2; }
+
+.chart-circle {
+  fill: white;
+  stroke: none; }
+
+.labels.x-labels {
+  text-anchor: middle; }
+
+.labels.y-labels {
+  text-anchor: end; }
+
+.labels {
+  font-size: 12px;
+  fill: white; }
+
+.horiz-rule {
+  stroke: rgba(60, 60, 60, 0.3);
+  stroke-dasharray: 0;
+  stroke-width: 0.5px; }
 
 /* responsive boogers */
 @media all and (min-width: 1080px) {
