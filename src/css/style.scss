@@ -32,7 +32,7 @@ a:hover {
 .table-container {
     box-sizing: border-box;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     font-size: 12px;
     height: 285px;
     margin: auto;
@@ -50,7 +50,7 @@ a:hover {
 
 .col-1of3 {
     box-sizing: border-box;
-    flex: 0 33.33333%;
+    flex: 1 0 33.33333%;
     overflow-y: hidden;
     padding: 0 10px;
 }
