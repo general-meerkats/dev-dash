@@ -22,21 +22,11 @@ var HitApi = (function () {
     function prepareEvents(e) {
         return {
             type    : e.type,
-            date    : formatDates(e.created_at),
+            date    : e.created_at,
             actor   : e.actor.display_login,
             avatar  : e.actor.avatar_url,
             payload : e.payload
         };
-    }
-
-
-    // format dates
-    function formatDates(date) {
-
-        return new Date(date)     // make date object for day & month abbrev
-            .toDateString()       // convert object to a string
-            .slice(0, 15)         // remove everything after the YYYY
-            .replace(/ 0/g, ' '); // remove leading zeros (ex. '04' => '4')
     }
 
     
