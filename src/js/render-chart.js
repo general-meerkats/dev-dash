@@ -56,10 +56,13 @@ var RenderChart = (function () {
     */
     function buildDateRange(events) {
         
-        var startDate   = new Date(events[0].date),
-            stopDate    = new Date(events[events.length - 1].date),
+        var normDates   = events.map( (e) => (formatDates(e.date)) ),
+            startDate   = new Date(normDates[0]),
+            stopDate    = new Date(normDates[normDates.length - 1]),
             dateArray   = [],
             currentDate = startDate;
+        
+        // console.log(normDates);
         
         while (currentDate <= stopDate) {
             dateArray.push( formatDates(currentDate) );
@@ -69,12 +72,12 @@ var RenderChart = (function () {
         // fancy stats
         console.log('========= DATE SPECS =========');
         console.log('Days in range: ' + dateArray.length);
-        console.log('   Start date: ' + formatDates(startDate));
-        console.log('    Stop date: ' + formatDates(stopDate));
+        console.log('   Start date: ' + startDate);
+        console.log('    Stop date: ' + stopDate);
         
         return dateArray;
     }
-    
+        
     
     /* Calculate max chart Y axis value
      * Max Y is multiple of 5 to make the chart look nice
@@ -108,7 +111,7 @@ var RenderChart = (function () {
      * @params   [array]   es   [raw events array]
      * @returns  [array]        [array of date & number of events]
     */
-    function prepareData(es) {
+    function prepareDateEvents(es) {
 
         var events = [],
             sortedEvents,
@@ -117,7 +120,7 @@ var RenderChart = (function () {
         
         es.forEach(function (evt) {
 
-            // console.log(evt);  // diag
+            //  console.log(evt);  // diag
 
             if (evt.type === 'PushEvent') {
 
@@ -144,16 +147,17 @@ var RenderChart = (function () {
         
         // get array of all dates in range
         dateArray = buildDateRange(sortedEvents);
+        // console.log(dateArray);
         
         // build array of data points: [date, #events per date]
         chartData = dateArray.map(function (date) {
             return [
                 
-                // the date
-                date,
+                // the date, as Month and Day
+                date.slice(3, 10),
                 
                 // number of events per date
-                sortedEvents.filter( (x) => x.date === date ).length
+                sortedEvents.filter( (x) => formatDates(x.date) === date ).length
             ];            
         });
         
@@ -379,7 +383,7 @@ var RenderChart = (function () {
                         text
                             .attr('x', (xPos + xMargin))
                             .attr('y', (height - 5))
-                            .text(xValue.slice(3, 10));
+                            .text(xValue);
 
                         group
                             .append(text);
@@ -400,7 +404,7 @@ var RenderChart = (function () {
                     text
                         .attr('x', (xPos + xMargin))
                         .attr('y', (height - 5))
-                        .text(xValue.slice(3, 10));
+                        .text(xValue);
 
                     group
                         .append(text);
@@ -432,15 +436,15 @@ var RenderChart = (function () {
             
             // empty parent SVG element before each render
             DOM.$svgElem.empty();
-            
+                        
             // format events to usable points
-            points = prepareData(events);
+            points = prepareDateEvents(events);
             
             // check if ALL events occur on the same day!
             if (sameDamnDay(points)) {
                 return;
             }
-        
+            
             // append axis label <text> <g>roups
             DOM.$svgElem
                 .append(genAxisLabels(points, 'y'))
