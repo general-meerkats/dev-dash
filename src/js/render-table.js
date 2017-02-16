@@ -10,7 +10,17 @@ var RenderTable = (function () {
     function cacheDom() {
         DOM.$container = $('.table-container');
     }
-        
+    
+    
+    // format dates
+    function formatDate(date) {
+
+        return new Date(date)     // make date object for day & month abbrev
+            .toDateString()       // convert object to a string
+            .slice(0, 15)         // remove everything after the YYYY
+            .replace(/ 0/g, ' '); // remove leading zeros (ex. '04' => '4')
+    }
+
 
     // public render method calls category renderers if category has events
     function render(commitEvents, todoEvents, mergeEvents) {
@@ -79,7 +89,7 @@ var RenderTable = (function () {
                     $paragraph
                         .append(`<span class="bolder">${evt.actor}</span> committed `)
                         .append($a)
-                        .append(` on ${evt.date}: `)
+                        .append(` on ${formatDate(evt.date)}: `)
                         .append($paraSpan);
 
                     $listItem
@@ -112,7 +122,7 @@ var RenderTable = (function () {
                 $paragraph
                     .append(`<span class="bolder">${evt.actor}</span> commented on `)
                     .append($a)
-                    .append(` on ${evt.date}: `)
+                    .append(` on ${formatDate(evt.date)}: `)
                     .append($paraSpan);
 
                 $listItem
@@ -169,7 +179,7 @@ var RenderTable = (function () {
                 $paragraph
                     .append(`<span class="bolder">${evt.actor}</span> ${evt.payload.action} `)
                     .append($a)
-                    .append(` on ${evt.date}: "${evt.payload.issue.title}"`);
+                    .append(` on ${formatDate(evt.date)}: "${evt.payload.issue.title}"`);
 
                 $listItem
                     .append($img)
@@ -187,7 +197,7 @@ var RenderTable = (function () {
                 $paragraph
                     .append(`<span class="bolder">${evt.actor}</span> commented on `)
                     .append($a)
-                    .append(` on ${evt.date}: "${evt.payload.comment.body}"`);
+                    .append(` on ${formatDate(evt.date)}: "${evt.payload.comment.body}"`);
 
                 $listItem
                     .append($img)
@@ -196,44 +206,6 @@ var RenderTable = (function () {
                 $list
                     .append($listItem);
             }
-
-            //            // CAN'T GET GH TO SEND US PROJECT-RELATED EVENTS - WTF?
-            //            } else if (evt.type === 'ProjectEvent') {
-            //                
-            //                $list
-            //                    .append(`<li>
-            //                                <img src="${evt.avatar}">
-            //                                <p>${evt.actor} ${evt.payload.action} ${evt.payload.project.name} on ${evt.date}</p>
-            //                                <a target="_blank" href="${evt.payload.project.url}">
-            //                                    ${evt.payload.project.body}
-            //                                </a>
-            //                            </li>`);
-            //                
-            //            } else if (evt.type === 'ProjectCardEvent') {
-            //                
-            //                $list
-            //                    .append(`<li>
-            //                                <img src="${evt.avatar}">
-            //                                <p>${evt.actor} ${evt.payload.action} 
-            //                                <a target="_blank" href="${evt.payload.project_card.url}">
-            //                                    ${evt.payload.project_card.note}
-            //                                </a>
-            //                                on ${evt.date}</p>
-            //                            </li>`);
-            //                
-            //            } else if (evt.type === 'ProjectColumnEvent') {
-            //                
-            //                $list
-            //                    .append(`<li>
-            //                                <img src="${evt.avatar}">
-            //                                <p>${evt.actor} ${evt.payload.action} 
-            //                                <a target="_blank" href="${evt.payload.project_column.url}">
-            //                                    ${evt.payload.project_column.name}
-            //                                </a>
-            //                                on ${evt.date}</p>
-            //                            </li>`);
-            //            }
-
         });
 
         $list
@@ -281,7 +253,7 @@ var RenderTable = (function () {
                         evt.payload.ref_type,
                         `<span class="bolder">${evt.payload.ref}</span>`,
                         'on',
-                        evt.date
+                        formatDate(evt.date)
                     ].join(' '));
 
                 $listItem
@@ -312,7 +284,7 @@ var RenderTable = (function () {
                     .append(`<span class="bolder">${evt.actor}</span>`)
                     .append(` ${evt.payload.action} `)
                     .append($a)
-                    .append(` on ${evt.date}`);
+                    .append(` on ${formatDate(evt.date)}`);
 
                 $listItem
                     .append($img)
@@ -334,7 +306,7 @@ var RenderTable = (function () {
                         'review of '
                     ].join(' '))
                     .append($a)
-                    .append(' on' + evt.date);
+                    .append(' on' + formatDate(evt.date));
 
                 $listItem
                     .append($img)
@@ -356,7 +328,7 @@ var RenderTable = (function () {
                         'pull request comment '
                     ].join(' '))
                     .append($a)
-                    .append(' on' + evt.date);
+                    .append(' on' + formatDate(evt.date));
 
                 $listItem
                     .append($img)
