@@ -33,6 +33,8 @@ var Backgrounds = (function() {
                 date: makeDate()
             };
         
+        console.log('Stored State: ', storedState);
+        
         return (storedState) ? storedState : newState;
     }
     
@@ -43,7 +45,8 @@ var Backgrounds = (function() {
     // and then set the background image CSS on <body>
     function pickBackground() {
                 
-         console.log(today, state);  // for diag
+        console.log('Today: ', today);  // for diag
+        console.log('State: ', state);  // for diag
         
         var curntImgIndx = bgArr.indexOf(state.imgName),
             newImgIndex,
@@ -52,7 +55,7 @@ var Backgrounds = (function() {
         if (new Date(today) > new Date(state.date)) {
             
             // find new image index
-            newImgIndex = (curntImgIndx === 6) ? 1 : curntImgIndx + 1;
+            newImgIndex = (curntImgIndx === 6) ? 0 : curntImgIndx + 1;
             
             // find new image string name
             newImgName = bgArr[newImgIndex];
@@ -68,6 +71,11 @@ var Backgrounds = (function() {
             
         } else {
             render(state.imgName);
+            // save current image name & date to local storage 
+            LS.setData('dev-dash-bg', {
+                imgName: state.imgName,
+                date: today
+            });
         }
         
     }
