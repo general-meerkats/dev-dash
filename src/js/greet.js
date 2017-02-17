@@ -13,7 +13,7 @@ var Greet = (function($) {
                       <input id="user-modal-name" class="InputAddOn-field" type="text" required>
                     </div>
                     <div class="Grid-cell InputAddOn">
-                      <span class="InputAddOn-item">GitHub Name:</span>
+                      <span class="InputAddOn-item">GitHub User Name:</span>
                       <input id="user-modal-username"  class="InputAddOn-field" type="text" required>
                     </div>
                       <div class="Grid-cell InputAddOn">
