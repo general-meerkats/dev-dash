@@ -1,9 +1,10 @@
 /* jshint esversion:6 */
-/* globals jQuery, document, console, LS */
+/* globals jQuery, document, console, LS, RepoSelect */
 
 var Greet = (function($) {
     
-    var userName,
+    var name,
+        githubName,
         DOM = {},
         
         // modal prompt template
@@ -24,7 +25,7 @@ var Greet = (function($) {
     
     // cache DOM elements
     function cacheDom() {
-        DOM.$greeting    = $('#greeting');
+        DOM.$greeting    = $('.greeting');
         
         DOM.$overlay = $('<div id="overlay"></div>');
         
@@ -49,17 +50,14 @@ var Greet = (function($) {
     function handleSubmit(e) {
         e.preventDefault();
         
-        // capture <input> values
-        var name       = e.currentTarget[0].value,
-            githubName = e.currentTarget[1].value;
-        
-        // set module scope userName to input 'name'
-        userName = name;
+        // set module scope names to input names
+        name = e.currentTarget[0].value;
+        githubName = e.currentTarget[1].value;
         
         // save user details to local storage
         LS.setData('dev-dash-user', {
-            name     : name,
-            username : githubName
+            name     : e.currentTarget[0].value,
+            githubName : e.currentTarget[1].value
         });
         
         // retract the modal panel
@@ -78,14 +76,14 @@ var Greet = (function($) {
             initialHour = tehDate.getHours();
         
         if (initialHour < 12) {
-            timeOfDay = "Morning";
+            timeOfDay = "morning";
         } else if (initialHour >= 12 && initialHour < 17) {
-            timeOfDay = "Afternoon";
+            timeOfDay = "afternoon";
         } else {
-            timeOfDay = "Evening";
+            timeOfDay = "evening";
         }
 
-        return `Good ${timeOfDay}, ${userName}.`;
+        return `Good ${timeOfDay}, ${name}.`;
     }
     
     
@@ -121,7 +119,8 @@ var Greet = (function($) {
         // if user found in local storage, go straight to greeting.
         // otherwise, show modal & prompt user for details
         if (storage && storage.name) {
-            userName = storage.name;
+            name = storage.name;
+            githubName = storage.githubName;
             displayMessage();
         } else {
             showModal();
@@ -129,9 +128,10 @@ var Greet = (function($) {
     }
     
 
-    // render DOM
+    // render DOM and call RepoSelect.getRepos()
     function displayMessage() {
         DOM.$greeting.text(makeMessage());
+        RepoSelect.getRepos(githubName);
     }
     
     

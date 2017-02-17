@@ -12,6 +12,11 @@ body {
   font-family: sans-serif;
   color: white; }
 
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1em; }
+
 a {
   color: #458b7b;
   text-decoration: none; }
@@ -23,7 +28,12 @@ a:hover {
 .bolder {
   font-weight: bold; }
 
-/* =========== table output =========== */
+/* =============================== GREETING ================================ */
+.greeting {
+  font-weight: bold;
+  margin: 1em 0; }
+
+/* ================================= TABLE ================================= */
 .table-container {
   box-sizing: border-box;
   display: -ms-flexbox;
@@ -31,16 +41,13 @@ a:hover {
   -ms-flex-flow: row nowrap;
       flex-flow: row nowrap;
   font-size: 12px;
-  height: 285px;
-  margin: auto;
-  max-width: 1200px; }
+  height: 285px; }
 
 .table-container h3 {
   text-align: center; }
 
 .inputs {
-  margin: 10px;
-  text-align: center; }
+  text-align: right; }
 
 .col-1of3 {
   box-sizing: border-box;
@@ -79,28 +86,10 @@ ul.col-list p {
       flex: 1 auto;
   margin: 0 0 0 5px; }
 
-.repo-select {
-  cursor: pointer;
-  font-weight: bold; }
-
-.repo-list {
-  color: black;
-  position: absolute;
-  width: 300px;
-  height: 200px;
-  background: white; }
-
-.repo-list ul {
-  list-style: none; }
-
-.hidden {
-  display: none; }
-
-/* ============== chart output ============== */
+/* ================================= CHART ================================= */
 .chart-container {
   box-sizing: border-box;
-  margin: 20px auto;
-  max-width: 1200px; }
+  margin-top: 20px; }
 
 .chart-line {
   stroke: white;
@@ -165,6 +154,95 @@ ul.col-list p {
   background: #2d2d2d;
   font-weight: bold;
   width: 100%;
+  cursor: pointer; }
+
+/* ============================== REPO SELECT ============================== */
+.hidden {
+  display: none; }
+
+.repo-select-highlight {
+  font-weight: bold;
+  cursor: pointer; }
+
+.repo-list {
+  position: absolute;
+  padding-top: 1em;
+  box-sizing: border-box;
+  width: 480px; }
+
+.repo-list p {
+  margin: 0;
+  padding: 0.1em; }
+
+.repo-list .inputs {
+  margin: .5em 1em; }
+
+.repo-list ul {
+  border-radius: .5em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; }
+
+.repo-list ul > li {
+  padding: .75em;
+  color: #bbbbbb; }
+
+.repo-list ul > li p {
+  width: 420px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.repo-list ul > li p:first-child {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: white; }
+
+.repo-list ul > li:nth-child(even) {
+  background: #242424; }
+
+.repo-list ul > li:nth-child(odd) {
+  background: #2d2d2d; }
+
+.repo-list .li-descriptions {
+  display: inline-block; }
+
+.repo-list .li-remove {
+  cursor: pointer;
+  float: right;
+  padding: .85em .25em; }
+
+.repo-list .li-remove:hover {
+  color: #f33; }
+
+.new-repo-form {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row no-wrap;
+      flex-flow: row no-wrap;
+  margin-top: .5em; }
+
+.new-repo-form > input,
+.new-repo-form > button {
+  border: none;
+  font-size: 1em;
+  line-height: 1.5em;
+  padding: 0.5em; }
+
+.new-repo-form > input {
+  -ms-flex: 1;
+      flex: 1; }
+
+.new-repo-form > input:first-child {
+  border-radius: .5em 0 0 .5em;
+  border-right: 1px solid #ccc; }
+
+.new-repo-form > button {
+  background-color: #ccc;
+  border-radius: 0 .5em .5em 0;
+  font-weight: bold;
+  width: 2.75em;
   cursor: pointer; }
 
 /* ============== responsive boogers ============== */

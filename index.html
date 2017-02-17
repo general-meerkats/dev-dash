@@ -15,21 +15,23 @@
 </head>
 <body>
 
-    <div class="inputs">
-        <form id="input-form" action="submit">
-            <input id="input-user" type="text" value="general-meerkats" placeholder="user" required/>
-            <input id="input-repo" type="text" value="meerkat_momentum" placeholder="repo" required/>
-            <button id="input-button">Get some</button>
-        </form>
-    </div>
+    <div class="container">
+        <div class="inputs">
+            <form id="input-form" action="submit">
+                <input id="input-user" type="text" value="general-meerkats" placeholder="user" required/>
+                <input id="input-repo" type="text" value="meerkat_momentum" placeholder="repo" required/>
+                <button id="input-button">Get some</button>
+            </form>
+        </div>
 
-    <section id="greeting"></section>
-    
-    <section id="repo-select"></section>
-   
-    <section class="table-container"></section>
-    
-    <section class="chart-container"></section>
+        <section class="greeting"></section>
+
+        <section class="repo-select"></section>
+
+        <section class="table-container"></section>
+
+        <section class="chart-container"></section>
+    </div>
 
     <!-- =========================== javascript =========================== -->
     <script src="lib/jquery.min.js"></script>
@@ -38,7 +40,7 @@
     <script src="src/js/local_storage.js"></script>
     <script src="src/js/render-table.js"></script>
     <script src="src/js/render-chart.js"></script>
-    <script src="src/js/repo-select.js"></script>
+    <script src="src/js/repo-select2.js"></script>
     <script src="src/js/backgrounds.js"></script>
     <script src="src/js/app.js"></script>
 
