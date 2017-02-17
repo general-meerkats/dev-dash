@@ -96,7 +96,7 @@ ul.col-list p {
 .hidden {
   display: none; }
 
-/* chart output */
+/* ============== chart output ============== */
 .chart-container {
   box-sizing: border-box;
   margin: 20px auto;
@@ -125,7 +125,49 @@ ul.col-list p {
   stroke-dasharray: 0;
   stroke-width: 0.5px; }
 
-/* responsive boogers */
+/* ============================= MODAL OVERLAY ============================= */
+#overlay {
+  background: #000;
+  height: 100%;
+  left: 0;
+  opacity: 0.8;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 998; }
+
+/* ============================= MODAL PROMPT ============================== */
+.user-modal {
+  box-sizing: border-box;
+  display: block;
+  position: fixed;
+  top: -200px;
+  width: 100%;
+  z-index: 999;
+  transition: transform 0.3s ease; }
+
+.user-modal-show {
+  transform: translateY(240px); }
+
+.user-modal > form {
+  background: #242424;
+  border-radius: .5em;
+  margin: auto;
+  padding: .5em 1em 1em .5em;
+  width: 420px; }
+
+.user-modal .InputAddOn-item {
+  background: #2d2d2d;
+  color: white; }
+
+.user-modal button {
+  display: inline-block;
+  background: #2d2d2d;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer; }
+
+/* ============== responsive boogers ============== */
 @media all and (min-width: 1080px) {
   .table-container {
     font-size: 14px;
