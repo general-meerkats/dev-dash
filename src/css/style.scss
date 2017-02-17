@@ -110,7 +110,7 @@ ul.col-list p {
 }
 
 
-/* chart output */
+/* ============== chart output ============== */
 
 .chart-container {
     box-sizing: border-box;
@@ -149,8 +149,67 @@ ul.col-list p {
 }
 
 
+/* ============================= MODAL OVERLAY ============================= */
+#overlay {
+    background: #000;
+    height: 100%;
+    left: 0;
+    opacity: 0.8;
+    position: fixed; 
+    top: 0;
+    width: 100%;
+    z-index: 998;
+}
 
-/* responsive boogers */
+
+/* ============================= MODAL PROMPT ============================== */
+.user-modal {
+    box-sizing: border-box;
+    display: block;
+    position: fixed;
+    top: -200px;
+    width: 100%;
+    z-index: 999;
+    -webkit-transition: -webkit-transform 0.3s ease;
+       -moz-transition: -webkit-transform 0.3s ease;
+         -o-transition: -webkit-transform 0.3s ease;
+    transition: -webkit-transform 0.3s ease;
+    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.user-modal-show {
+    -webkit-transform: translateY(240px);
+       -moz-transform: translateY(240px);
+        -ms-transform: translateY(240px);
+         -o-transform: translateY(240px);
+            transform: translateY(240px);
+}
+
+.user-modal > form {
+    background: rgb(36, 36, 36);
+    border-radius: .5em;
+    margin: auto;
+    padding: .5em 1em 1em .5em;
+    width: 420px;
+}
+
+.user-modal .InputAddOn-item {
+    background: rgb(45, 45, 45);
+    color: white;
+}
+
+.user-modal button {
+//    flex: none;
+    display: inline-block;
+    background: rgb(45, 45, 45);
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+}
+
+
+/* ============== responsive boogers ============== */
 
 @media all and (min-width: 1080px) {
     .table-container {
