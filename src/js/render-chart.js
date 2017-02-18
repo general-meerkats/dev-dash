@@ -70,10 +70,10 @@ var RenderChart = (function () {
         }
 
         // fancy stats
-        console.log('========= DATE SPECS =========');
-        console.log('Days in range: ' + dateArray.length);
-        console.log('   Start date: ' + startDate);
-        console.log('    Stop date: ' + stopDate);
+//        console.log('========= DATE SPECS =========');
+//        console.log('Days in range: ' + dateArray.length);
+//        console.log('   Start date: ' + startDate);
+//        console.log('    Stop date: ' + stopDate);
         
         return dateArray;
     }
@@ -422,6 +422,10 @@ var RenderChart = (function () {
         
         var points;
         
+        // empty parent SVG element before each render
+        DOM.$svgElem.empty();
+        
+        
         // add CSS class, namespace and attributes to main <svg> element
         DOM.$svgElem
             .addClass('chart--content')
@@ -434,9 +438,6 @@ var RenderChart = (function () {
         
         if (events.length > 0) {
             
-            // empty parent SVG element before each render
-            DOM.$svgElem.empty();
-                        
             // format events to usable points
             points = prepareDateEvents(events);
             
