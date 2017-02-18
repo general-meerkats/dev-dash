@@ -29,19 +29,28 @@ var HitApi = (function () {
         };
     }
 
+// OLD getEvents used with the old <input> elements    
+//    // get github events
+//    function getEvents(e) {
+//        
+//        e.preventDefault();
+//
+//        var api = {
+//            url   : 'https://api.github.com/repos',
+//            user  : e.currentTarget[0].value,
+//            repo  : e.currentTarget[1].value,
+//            route : 'events'
+//        };
+//        var repoEvents = `${api.url}/${api.user}/${api.repo}/${api.route}`;
+//
+//        $.getJSON(repoEvents).then(handleResponse);
+//    }
     
     // get github events
-    function getEvents(e) {
+    function getEvents(author, repo) {
         
-        e.preventDefault();
-
-        var api = {
-            url   : 'https://api.github.com/repos',
-            user  : e.currentTarget[0].value,
-            repo  : e.currentTarget[1].value,
-            route : 'events'
-        };
-        var repoEvents = `${api.url}/${api.user}/${api.repo}/${api.route}`;
+        var url= 'https://api.github.com/repos',
+            repoEvents = `${url}/${author}/${repo}/events`;
 
         $.getJSON(repoEvents).then(handleResponse);
     }
@@ -102,7 +111,8 @@ var HitApi = (function () {
     
     // return public method
     return {
-        init: init
+        init: init,
+        getEvents: getEvents
     };
 
 }());
