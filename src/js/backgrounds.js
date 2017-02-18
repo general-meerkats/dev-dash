@@ -33,7 +33,7 @@ var Backgrounds = (function() {
                 date: makeDate()
             };
         
-        console.log('Stored State: ', storedState);
+        // console.log('Stored State: ', storedState);
         
         return (storedState) ? storedState : newState;
     }
@@ -45,8 +45,8 @@ var Backgrounds = (function() {
     // and then set the background image CSS on <body>
     function pickBackground() {
                 
-        console.log('Today: ', today);  // for diag
-        console.log('State: ', state);  // for diag
+        // console.log('Today: ', today);  // for diag
+        // console.log('State: ', state);  // for diag
         
         var curntImgIndx = bgArr.indexOf(state.imgName),
             newImgIndex,
