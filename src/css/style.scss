@@ -25,11 +25,27 @@ a {
 }
 
 a:hover {
-    color: rgb(36, 36, 36);
+    text-shadow: 0 0 10px rgba(100,100,255,.7)
 }
 
 .bolder {
     font-weight: bold;
+}
+
+
+/* ============================== SCROLLBARS =============================== */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: rgba(255,255,255,0.7);
+}
+
+::-webkit-scrollbar-corner {
+    display: none;
 }
 
 
@@ -63,6 +79,7 @@ a:hover {
 
 .col-1of3:hover {
     overflow: auto;
+    padding-right: 5px;
 }
 
 ul.col-list {
