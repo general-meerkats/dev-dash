@@ -311,6 +311,7 @@ ul.col-list p {
 @media all and (max-width: 720px) {
     .table-container {
         display: block;
+        height: auto;
         margin: 0 auto;
         max-width: 600px;
         width: 80%;
