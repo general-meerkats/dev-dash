@@ -18,12 +18,10 @@ body {
   padding: 1em; }
 
 a {
-  color: #458b7b;
-  text-decoration: none; }
+  color: white; }
 
 a:hover {
-  color: #aff5e5;
-  text-decoration: underline; }
+  color: #f33; }
 
 .bolder {
   font-weight: bold; }
@@ -58,10 +56,6 @@ a:hover {
 
 .col-1of3:hover {
   overflow-y: auto; }
-
-.col-1of3:nth-child(2) {
-  border-left: 1px solid #aaa;
-  border-right: 1px solid #aaa; }
 
 ul.col-list {
   list-style: none;
