@@ -25,7 +25,7 @@ a {
 }
 
 a:hover {
-    color: #f33;
+    color: rgb(36, 36, 36);
 }
 
 .bolder {
@@ -36,7 +36,7 @@ a:hover {
 /* =============================== GREETING ================================ */
 .greeting {
     font-weight: bold;
-    margin: 1em 0;
+    margin: 0;
 }
 
 
@@ -46,26 +46,23 @@ a:hover {
     display: flex;
     flex-flow: row nowrap;
     font-size: 12px;
-    height: 285px;
+    height: 270px;
 }
 
 .table-container h3 {
     text-align: center;
-}
-
-.inputs {
-    text-align: right;
+    margin: 0;
 }
 
 .col-1of3 {
     box-sizing: border-box;
     flex: 1 0 33.33333%;
-    overflow-y: hidden;
+    overflow: hidden;
     padding: 0 10px;
 }
 
 .col-1of3:hover {
-    overflow-y: auto;
+    overflow: auto;
 }
 
 ul.col-list {
@@ -203,7 +200,6 @@ ul.col-list p {
 
 .repo-list {
     position: absolute;
-    padding-top: 1em;
     box-sizing: border-box;
     width: 480px;
 }
