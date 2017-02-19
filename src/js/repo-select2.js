@@ -7,7 +7,7 @@ var RepoSelect = (function ($) {
 
     var DOM = {},
         repos = [],
-        pickerIsRetracted = true;
+        selectedRepo;
     
     
     // util checks local storage for previously saved list of repos
@@ -19,7 +19,7 @@ var RepoSelect = (function ($) {
     // cache DOM elements
     function cacheDom() {
         DOM.$selectContainer = $('.repo-select');
-        DOM.$selector      = $(document.createElement('span'));
+        DOM.$p             = $(document.createElement('p'));
         DOM.$listContainer = $(document.createElement('div'));
         DOM.$ul            = $(document.createElement('ul'));
         DOM.$newRepoForm   = $(document.createElement('form'));
@@ -31,7 +31,7 @@ var RepoSelect = (function ($) {
 
     // bind events
     function bindEvents() {
-        DOM.$selector.on('click', showRepoList);
+        DOM.$selectContainer.on('click', '.repo-select-highlight', showRepoList);
         DOM.$ul.on('click', 'div.li-descriptions', selectRepo);
         DOM.$ul.on('click', 'span.li-remove', deleteRepo);
         DOM.$newRepoForm.on('submit', addRepo);
@@ -53,7 +53,10 @@ var RepoSelect = (function ($) {
         
         var picked = e.currentTarget.children[0].innerHTML.split(' / ');
         
-        console.log(picked);
+        selectedRepo = picked[1];
+        
+        // console.log(picked); // diag
+        populateMenu(repos);
             
         // Call HitApi module's public .getEvents() method
         HitApi.getEvents(picked[0], picked[1]);
@@ -72,7 +75,7 @@ var RepoSelect = (function ($) {
             selectedElement = $(e.target).parent(),
             selectedElemId  = selectedElement.attr('id');
         
-        console.log('Delete: ' + authorAndRepo); // diag
+        // console.log('Delete: ' + authorAndRepo); // diag
         
         repos.splice(selectedElemId, 1);
         selectedElement.remove();
@@ -110,12 +113,21 @@ var RepoSelect = (function ($) {
     }
     
     
-    // populate module scope repos array
+    // populate module scope repos array & call HitApi on 1st load
     function populateRepos(data) {
         
         data.forEach(function (repo) {
             repos.push(repo);
         });
+        
+        // capture 1st repo's author & repo name in an array
+        var repoZero = repos[0].full_name.split('/');
+
+        // set selected repo to first repo's name
+        selectedRepo = repoZero[1];
+        
+        // Call HitApi module's public .getEvents() method
+        HitApi.getEvents(repoZero[0], repoZero[1]);
         
         return data;
     }
@@ -126,14 +138,14 @@ var RepoSelect = (function ($) {
         LS.setData('dev-dash-repos', repos);
         return data;
     }
-
-
+    
+    
     // populate repo list menu
     function populateMenu(data) {
         
-        console.log(data);
+        // console.log(data);
         
-        DOM.$ul.empty();
+        DOM.$ul.html('');
 
         data.forEach(function (repo, ind) {
             var $li = $(document.createElement('li'));
@@ -156,7 +168,7 @@ var RepoSelect = (function ($) {
     
     // render
     function render() {
-        
+                        
         DOM.$newRepoBtn
             .html('+');
 
@@ -176,29 +188,26 @@ var RepoSelect = (function ($) {
 
         DOM.$listContainer
             .addClass('repo-list')
-            .empty()
+            
             .append(DOM.$ul)
             .append(DOM.$newRepoForm);
         
-        DOM.$selector
-            .empty()
-            .addClass('repo-select-highlight')
-            .html(`${repos[0].name}&#x25BC;`);
-        
+        DOM.$p
+            .html(`You are currently viewing the <span class="repo-select-highlight">${selectedRepo}&#x25BC;</span> repository.`);
+                
         DOM.$selectContainer
-            .append('You are currently viewing the ')
-            .append(DOM.$selector)
-            .append(' repository.')
+            .append(DOM.$p)
             .append(DOM.$listContainer);
+
     }
 
 
     function getRepos(userName) {
         
         if (checkStorage) {
-            console.log('Using local storage');   // decalre intentions!
-            repos = LS.getData('dev-dash-repos'); // cache to module scope 'repos'
-            populateMenu(repos);                  // build the list
+            // console.log('Using local storage'); // diag
+            populateRepos(LS.getData('dev-dash-repos')); // cache 'repos' to module scope var
+            populateMenu(repos);  // build the list
             
         } else {
             
@@ -220,6 +229,7 @@ var RepoSelect = (function ($) {
         bindEvents();
         
         DOM.$listContainer.addClass('hidden');
+        
     }
     
     
