@@ -28,8 +28,9 @@ var Backgrounds = (function() {
     // load state from storage
     function loadState() {
         var storedState = LS.getData('dev-dash-bg'),
+            imgIndx  = Math.floor(Math.random() * bgArr.length),
             newState = {
-                imgName: '001',
+                imgName: bgArr[imgIndx],
                 date: makeDate()
             };
         
