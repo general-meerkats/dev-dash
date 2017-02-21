@@ -13,6 +13,19 @@ body {
   font-family: sans-serif;
   color: white; }
 
+/* anti-iOS Safari / Webkit tweak */
+textarea,
+input.text,
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+input[type="date"],
+input[type="number"],
+.input-checkbox {
+  -webkit-appearance: none;
+  border-radius: 0;
+  margin: 0; }
+
 .container {
   max-width: 1200px;
   margin: auto;
@@ -160,7 +173,7 @@ ul.col-list p {
   border-radius: .5em;
   margin: auto;
   padding: .5em 1em 1em .5em;
-  width: 420px; }
+  max-width: 420px; }
 
 .user-modal .InputAddOn-item {
   background: #2d2d2d;
@@ -173,6 +186,11 @@ ul.col-list p {
   width: 100%;
   cursor: pointer; }
 
+/* fix default input width exceeds containing element */
+.user-modal input,
+.repo-list input {
+  min-width: 100px; }
+
 /* ============================== REPO SELECT ============================== */
 .hidden {
   display: none; }
@@ -184,7 +202,8 @@ ul.col-list p {
 .repo-list {
   position: absolute;
   box-sizing: border-box;
-  width: 480px; }
+  width: calc(100% - 1em);
+  max-width: 480px; }
 
 .repo-list p {
   margin: 0;
@@ -206,7 +225,6 @@ ul.col-list p {
   color: #bbbbbb; }
 
 .repo-list ul > li p {
-  width: 420px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; }
@@ -223,7 +241,8 @@ ul.col-list p {
   background: #2d2d2d; }
 
 .repo-list .li-descriptions {
-  display: inline-block; }
+  display: inline-block;
+  width: calc(100% - 40px); }
 
 .repo-list .li-remove {
   cursor: pointer;
@@ -276,6 +295,10 @@ ul.col-list p {
     max-height: calc(100vh - 370px); } }
 
 @media all and (max-width: 720px) {
+  body {
+    font-size: 12px; }
+  .container {
+    padding: .5em .5em 0 .5em; }
   .table-container {
     display: block;
     height: auto;

@@ -15,6 +15,20 @@ body {
     color: white;
 }
 
+/* anti-iOS Safari / Webkit tweak */
+textarea,
+input.text,
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+input[type="date"],
+input[type="number"],
+.input-checkbox {
+    -webkit-appearance: none;
+    border-radius: 0;
+    margin: 0;
+}
+
 .container {
     max-width: 1200px;
     margin: auto;
@@ -195,7 +209,7 @@ ul.col-list p {
     border-radius: .5em;
     margin: auto;
     padding: .5em 1em 1em .5em;
-    width: 420px;
+    max-width: 420px;
 }
 
 .user-modal .InputAddOn-item {
@@ -212,6 +226,11 @@ ul.col-list p {
     cursor: pointer;
 }
 
+/* fix default input width exceeds containing element */
+.user-modal input,
+.repo-list input {
+    min-width: 100px;
+}
 
 /* ============================== REPO SELECT ============================== */
 
@@ -227,7 +246,8 @@ ul.col-list p {
 .repo-list {
     position: absolute;
     box-sizing: border-box;
-    width: 480px;
+    width: calc(100% - 1em);
+    max-width: 480px;
 }
 
 .repo-list p {
@@ -254,7 +274,6 @@ ul.col-list p {
 }
 
 .repo-list ul > li p {
-    width: 420px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -276,6 +295,7 @@ ul.col-list p {
 
 .repo-list .li-descriptions {
     display: inline-block;
+    width: calc(100% - 40px);
 }
 
 .repo-list .li-remove {
@@ -343,6 +363,14 @@ ul.col-list p {
 }
 
 @media all and (max-width: 720px) {
+    
+    body {
+        font-size: 12px;
+    }
+    
+    .container {
+        padding: .5em .5em 0 .5em;
+    }
     
     .table-container {
         display: block;
