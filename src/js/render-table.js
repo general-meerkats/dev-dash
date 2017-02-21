@@ -8,7 +8,7 @@ var RenderTable = (function () {
     
     // cache DOM elements
     function cacheDom() {
-        DOM.$container = $('.table-container');
+        DOM.$tableContainer = $('.table-container');
     }
     
     
@@ -26,8 +26,9 @@ var RenderTable = (function () {
     function render(commitEvents, todoEvents, mergeEvents) {
 
         // clear previous results
-        DOM.$container.empty();
-
+        DOM.$tableContainer
+            .empty();
+        
         if (commitEvents.length > 0) {
             renderCommitEvents(commitEvents);
         }
@@ -47,8 +48,9 @@ var RenderTable = (function () {
 
         // gets PushEvents & CommitCommentEvents
 
-        var $column = $(document.createElement('div')),
-            $list   = $(document.createElement('ul'));
+        var $listContainer = $(document.createElement('div')),
+            $column       = $(document.createElement('div')),
+            $list         = $(document.createElement('ul'));
 
         es.forEach(function (evt) {
 
@@ -137,13 +139,17 @@ var RenderTable = (function () {
 
         $list
             .addClass('col-list');
-
-        $column
-            .addClass('col-1of3')
-            .append(`<h3>${es.length} Commit-Related Events</h3>`)
+        
+        $listContainer
             .append($list);
 
-        DOM.$container.append($column);
+        $column
+            .addClass('table-col')
+            .append(`<h3>${es.length} Commit-Related Events</h3>`)
+            .append($listContainer);
+
+        DOM.$tableContainer
+            .append($column);
 
     }
 
@@ -212,11 +218,12 @@ var RenderTable = (function () {
             .addClass('col-list');
 
         $column
-            .addClass('col-1of3')
+            .addClass('table-col')
             .append(`<h3>${es.length} Todo-Related Events</h3>`)
             .append($list);
 
-        DOM.$container.append($column);
+        DOM.$tableContainer
+            .append($column);
 
     }
 
@@ -344,11 +351,12 @@ var RenderTable = (function () {
             .addClass('col-list');
 
         $column
-            .addClass('col-1of3')
+            .addClass('table-col')
             .append(`<h3>${es.length} Merge-Related Events</h3>`)
             .append($list);
 
-        DOM.$container.append($column);
+        DOM.$tableContainer
+            .append($column);
 
     }
     

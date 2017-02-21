@@ -1,5 +1,6 @@
 html,
 body {
+    height: 100%;
     margin: 0;
     padding: 0;
 }
@@ -17,7 +18,7 @@ body {
 .container {
     max-width: 1200px;
     margin: auto;
-    padding: 1em;
+    padding: 1em 1em 0 1em;
 }
 
 a {
@@ -66,20 +67,19 @@ a:hover {
 }
 
 .table-container h3 {
-    text-align: center;
-    margin: 0;
+    margin: 0 0 0 50px;
 }
 
-.col-1of3 {
+.table-col {
     box-sizing: border-box;
     flex: 1 0 33.33333%;
     overflow: hidden;
-    padding: 0 10px;
+    padding: 0 15px 0 0;
 }
 
-.col-1of3:hover {
+.table-col:hover {
     overflow: auto;
-    padding-right: 5px;
+    padding-right: 10px;
 }
 
 ul.col-list {
@@ -94,6 +94,7 @@ ul.col-list li {
 }
 
 ul.col-list img {
+    background: #111;
     border-radius: 50%;
     flex: none;
     height: 45px;
@@ -109,8 +110,17 @@ ul.col-list p {
 /* ================================= CHART ================================= */
 
 .chart-container {
+    display: flex;
     box-sizing: border-box;
-    margin-top: 20px;
+    width: 100%;
+    justify-content: center;
+    height: calc(100vh - 356px);
+}
+
+.chart--content {
+    flex: 1;
+    width: 100%;
+    margin: auto;
 }
 
 .chart-line {
@@ -204,7 +214,6 @@ ul.col-list p {
 
 
 /* ============================== REPO SELECT ============================== */
-
 
 .hidden {
     display: none;
@@ -316,26 +325,40 @@ ul.col-list p {
 @media all and (min-width: 1080px) {
     .table-container {
         font-size: 14px;
-        height: 312px;
+        height: 282px;
     }
     
     ul.col-list img {
         height: 50px;
         width:  50px;
     }
+    
+    .table-container h3 {
+        margin: 0 0 0 55px;
+    }
+    
+    .chart-container {
+        max-height: calc(100vh - 370px);
+    }
 }
 
 @media all and (max-width: 720px) {
+    
     .table-container {
         display: block;
         height: auto;
         margin: 0 auto;
         max-width: 600px;
-        width: 80%;
+        width: 100%;
     }
-    .col-1of3,
-    .col-1of3:nth-child(2) {
-        border: none;
-        flex: none;
+    
+    .table-col {
+        padding: 0;
+        overflow: hidden;
+    }
+    
+    .table-col:hover {
+        overflow: hidden;
+        padding-right: 0;
     }
 }
