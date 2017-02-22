@@ -116,20 +116,24 @@ var RepoSelect = (function ($) {
     // populate module scope repos array & call HitApi on 1st load
     function populateRepos(data) {
         
-        data.forEach(function (repo) {
-            repos.push(repo);
-        });
-        
-        // capture 1st repo's author & repo name in an array
-        var repoZero = repos[0].full_name.split('/');
+        if (data && data.length) {
 
-        // set selected repo to first repo's name
-        selectedRepo = repoZero[1];
         
-        // Call HitApi module's public .getEvents() method
-        HitApi.getEvents(repoZero[0], repoZero[1]);
-        
-        return data;
+            data.forEach(function (repo) {
+                repos.push(repo);
+            });
+
+            // capture 1st repo's author & repo name in an array
+            var repoZero = repos[0].full_name.split('/');
+
+            // set selected repo to first repo's name
+            selectedRepo = repoZero[1];
+
+            // Call HitApi module's public .getEvents() method
+            HitApi.getEvents(repoZero[0], repoZero[1]);
+
+            return data;
+        }
     }
     
     
@@ -145,24 +149,33 @@ var RepoSelect = (function ($) {
         
         // console.log(data);
         
-        DOM.$ul.html('');
+        if (data && data.length) {
+            
+            DOM.$ul.html('');
 
-        data.forEach(function (repo, ind) {
-            var $li = $(document.createElement('li'));
+            data.forEach(function (repo, ind) {
+                var $li = $(document.createElement('li'));
 
-            $li
-                .attr('id', ind)
-                .html(`<div class="li-descriptions" data-repo="${repo.name}">
-                         <p>${repo.owner.login} / ${repo.name}</p>
-                         <p>${repo.description}</p>
-                       </div>
-                       <span class="li-remove">&#10060</span>`);
+                $li
+                    .attr('id', ind)
+                    .html(`<div class="li-descriptions" data-repo="${repo.name}">
+                             <p>${repo.owner.login} / ${repo.name}</p>
+                             <p>${repo.description}</p>
+                           </div>
+                           <span class="li-remove">&#10060</span>`);
 
-            DOM.$ul
-                .append($li);
-        });
+                DOM.$ul
+                    .append($li);
+            });
+
+            render();
         
-        render();
+        } else {
+            console.log('no repos, holmes');
+            render();
+            DOM.$listContainer
+                .removeClass('hidden');
+        }
     }
     
     
