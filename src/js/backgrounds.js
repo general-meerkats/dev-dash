@@ -6,7 +6,7 @@ var Backgrounds = (function() {
     'use strict';
     
     var DOM = {},
-        bgArr = ['001', '002', '003', '004', '005', '006', '007'],
+        bgArr = ['001', '002', '003', '004', '005', '006', '007', '008'],
         today = makeDate(),
         state = loadState();
     
@@ -56,7 +56,7 @@ var Backgrounds = (function() {
         if (new Date(today) > new Date(state.date)) {
             
             // find new image index
-            newImgIndex = (curntImgIndx === 6) ? 0 : curntImgIndx + 1;
+            newImgIndex = (curntImgIndx === 7) ? 0 : curntImgIndx + 1;
             
             // find new image string name
             newImgName = bgArr[newImgIndex];
