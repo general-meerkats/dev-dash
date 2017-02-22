@@ -1,7 +1,7 @@
 /* jshint esversion:6 */
-/* globals $, console, LS */
+/* globals jQuery, console, LS */
 
-var Backgrounds = (function() {
+var Backgrounds = (function($) {
     
     'use strict';
     
@@ -101,4 +101,4 @@ var Backgrounds = (function() {
         init: init
     };
     
-}());
+}(jQuery));

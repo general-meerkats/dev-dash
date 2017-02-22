@@ -1,7 +1,7 @@
 /* jshint esversion:6 */
-/* globals $, document, console, RenderTable, RenderChart */
+/* globals jQuery, document, console, RenderTable, RenderChart */
 
-var HitApi = (function () {
+var HitApi = (function ($) {
 
     var DOM = {};
     
@@ -29,22 +29,6 @@ var HitApi = (function () {
         };
     }
 
-// OLD getEvents used with the old <input> elements    
-//    // get github events
-//    function getEvents(e) {
-//        
-//        e.preventDefault();
-//
-//        var api = {
-//            url   : 'https://api.github.com/repos',
-//            user  : e.currentTarget[0].value,
-//            repo  : e.currentTarget[1].value,
-//            route : 'events'
-//        };
-//        var repoEvents = `${api.url}/${api.user}/${api.repo}/${api.route}`;
-//
-//        $.getJSON(repoEvents).then(handleResponse);
-//    }
     
     // get github events
     function getEvents(author, repo) {
@@ -92,10 +76,6 @@ var HitApi = (function () {
                 .filter((e) => mergeTypes.indexOf(e.type) !== -1)
                 .map(prepareEvents);
         
-//        console.log('Commit types: ' + commitEvents.length);
-//        console.log('  Todo types: ' + todoEvents.length);
-//        console.log(' Merge types: ' + mergeEvents.length);
-        
         // call renderers
         RenderTable.render(commitEvents, todoEvents, mergeEvents);
         RenderChart.render(response.map(prepareEvents));
@@ -109,10 +89,10 @@ var HitApi = (function () {
     }
     
     
-    // return public method
+    // return public methods
     return {
         init: init,
         getEvents: getEvents
     };
 
-}());
+}(jQuery));

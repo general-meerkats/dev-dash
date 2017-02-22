@@ -4,7 +4,7 @@
 /* jshint esversion:6 */
 /* globals $, console, document */
 
-var RenderChart = (function () {
+var RenderChart = (function ($) {
 
     var 
         // placeholder object for cached DOM elements
@@ -62,18 +62,16 @@ var RenderChart = (function () {
             dateArray   = [],
             currentDate = startDate;
         
-        // console.log(normDates);
-        
         while (currentDate <= stopDate) {
             dateArray.push( formatDates(currentDate) );
             currentDate = currentDate.addDays(1);
         }
 
         // fancy stats
-//        console.log('========= DATE SPECS =========');
-//        console.log('Days in range: ' + dateArray.length);
-//        console.log('   Start date: ' + startDate);
-//        console.log('    Stop date: ' + stopDate);
+        // console.log('========= DATE SPECS =========');
+        // console.log('Days in range: ' + dateArray.length);
+        // console.log('   Start date: ' + startDate);
+        // console.log('    Stop date: ' + stopDate);
         
         return dateArray;
     }
@@ -94,9 +92,6 @@ var RenderChart = (function () {
         }, points[0][1]);
 
         quotient = Math.floor(maxNumEvts / 4);
-
-        // console.log('Max daily events: ' + maxNumEvts);
-        // console.log('.. so Y axis max: ' + ((quotient + 1) * 4));
 
         // return 1 more than the quotient, * 5
         return ((quotient + 1) * 4);
@@ -161,8 +156,6 @@ var RenderChart = (function () {
             ];            
         });
         
-        // console.log(chartData);  // diag
-    
         return chartData;
     }
     
@@ -473,10 +466,10 @@ var RenderChart = (function () {
     }
 
 
-    // return public api
+    // return public methods
     return {
         init: init,
         render: render
     };
 
-}());
+}(jQuery));

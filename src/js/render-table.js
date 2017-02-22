@@ -1,7 +1,7 @@
 /* jshint esversion:6 */
-/* globals $, document */
+/* globals jQuery, document */
 
-var RenderTable = (function () {
+var RenderTable = (function ($) {
 
     var DOM = {};
     
@@ -274,7 +274,6 @@ var RenderTable = (function () {
 
                 // from: https://api.github.com/repos/belcurv/meerkat_momentum/pulls/11
                 //   to: https://github.com/belcurv/meerkat_momentum/pull/11
-
                 cleanUrl = (evt.payload.pull_request.url)
                     // remove 'api.'
                     .replace(/\/\/api./, '\/\/')
@@ -367,10 +366,10 @@ var RenderTable = (function () {
     }
 
 
-    // return public method
+    // return public methods
     return {
         init: init,
         render: render
     };
 
-}());
+}(jQuery));

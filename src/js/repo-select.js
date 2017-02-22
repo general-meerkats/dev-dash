@@ -1,11 +1,9 @@
 /* jshint esversion:6 */
 /* globals jQuery, document, console, LS, HitApi */
 
-// Goal: "You are currently viewing {RepoName} \/ repository."
-
 var RepoSelect = (function ($) {
 
-    var DOM = {},
+    var DOM   = {},
         repos = [],
         selectedRepo;
     
@@ -19,13 +17,13 @@ var RepoSelect = (function ($) {
     // cache DOM elements
     function cacheDom() {
         DOM.$selectContainer = $('.repo-select');
-        DOM.$p             = $(document.createElement('p'));
-        DOM.$listContainer = $(document.createElement('div'));
-        DOM.$ul            = $(document.createElement('ul'));
-        DOM.$newRepoForm   = $(document.createElement('form'));
-        DOM.$newRepoUser   = $(document.createElement('input'));
-        DOM.$newRepoRepo   = $(document.createElement('input'));
-        DOM.$newRepoBtn    = $(document.createElement('button'));
+        DOM.$p               = $(document.createElement('p'));
+        DOM.$listContainer   = $(document.createElement('div'));
+        DOM.$ul              = $(document.createElement('ul'));
+        DOM.$newRepoForm     = $(document.createElement('form'));
+        DOM.$newRepoUser     = $(document.createElement('input'));
+        DOM.$newRepoRepo     = $(document.createElement('input'));
+        DOM.$newRepoBtn      = $(document.createElement('button'));
     }
 
 
@@ -71,7 +69,7 @@ var RepoSelect = (function ($) {
     function deleteRepo(e) {
         e.stopPropagation();
         
-        var authorAndRepo = e.target.previousElementSibling.dataset.repo,
+        var authorAndRepo   = e.target.previousElementSibling.dataset.repo,
             selectedElement = $(e.target).parent(),
             selectedElemId  = selectedElement.attr('id');
         
@@ -215,6 +213,7 @@ var RepoSelect = (function ($) {
     }
 
 
+    // public method to kick of the whole module
     function getRepos(userName) {
         
         if (checkStorage) {
@@ -240,17 +239,14 @@ var RepoSelect = (function ($) {
     function init() {
         cacheDom();
         bindEvents();
-        
         DOM.$listContainer.addClass('hidden');
-        
     }
     
     
-    // export public api
+    // export public methods
     return {
         init: init,
         getRepos: getRepos
     };
-    
 
 }(jQuery));
