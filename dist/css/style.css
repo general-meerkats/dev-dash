@@ -168,6 +168,10 @@ ul.col-list p {
 .user-modal-show {
   transform: translateY(240px); }
 
+.user-modal-error {
+  color: darkred;
+  text-align: center; }
+
 .user-modal > form {
   background: #242424;
   border-radius: .5em;
