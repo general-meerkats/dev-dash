@@ -7,5 +7,9 @@
 
     "chrome_url_overrides": {
         "newtab": "index.html"
+    },
+    
+    "icons": {
+        "128": "dist/assets/favicon.png"
     }
 }
