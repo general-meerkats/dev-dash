@@ -8,7 +8,7 @@ var Greet = (function($) {
         DOM = {},
         
         // modal prompt template
-        modalForm = `<form id="user-modal-form" class="Grid Grid--gutters Grid--1of2" action="submit">
+        modalForm = `<form id="user-modal-form" class="Grid Grid--gutters Grid--full" action="submit">
                     <div class="Grid-cell InputAddOn">
                       <span class="InputAddOn-item">Your Name:</span>
                       <input id="user-modal-name" class="InputAddOn-field" type="text" required>
