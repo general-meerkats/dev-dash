@@ -26,14 +26,18 @@ var Greet = (function($) {
     // cache DOM elements
     function cacheDom() {
         DOM.$greeting    = $('.greeting');
-        
-        DOM.$overlay = $('<div id="overlay"></div>');
-        
+        DOM.$overlay     = $('<div id="overlay"></div>');
         DOM.$modalPrompt = $(document.createElement('div'));
+        DOM.$modalError  = $(document.createElement('p'));
+
         DOM.$modalPrompt
             .attr('id', 'user-modal')
             .addClass('user-modal')
             .html(modalForm);
+        
+        DOM.$modalError
+            .addClass('user-modal-error')
+            .html('GitHub Username Not Found');
         
         $('body')
             .append(DOM.$modalPrompt);
@@ -51,25 +55,43 @@ var Greet = (function($) {
         e.preventDefault();
         
         // set module scope names to input names
-        name = e.currentTarget[0].value;
-        githubName = e.currentTarget[1].value;
+        name = e.currentTarget[0].value.trim();
+        githubName = e.currentTarget[1].value.trim();
         
-        // save user details to local storage
-        LS.setData('dev-dash-user', {
-            name     : e.currentTarget[0].value,
-            githubName : e.currentTarget[1].value
-        });
-        
-        // retract the modal panel
-        hideModal();
-        
-        // call display message
-        displayMessage();
-        
+        checkUser(githubName)
+            .then(function (res) {
+                if (res.login === githubName) {
+                    
+                    // save user details to local storage
+                    LS.setData('dev-dash-user', {
+                        name     : e.currentTarget[0].value,
+                        githubName : e.currentTarget[1].value
+                    });
+
+                    // retract the modal panel
+                    hideModal();
+
+                    // call display message
+                    displayMessage();
+                }
+            })
+            .catch(function (err) {
+            
+                // warn user
+                DOM.$modalPrompt
+                    .append(DOM.$modalError);
+            
+            });
     }
     
     
-    // assembly time-based message to greet user
+    // check Github username
+    function checkUser(u) {
+        return $.getJSON('https://api.github.com/users/' + u);
+    }
+    
+    
+    // assemble time-based message to greet user
     function makeMessage() {
         var timeOfDay,
             tehDate = new Date(),
