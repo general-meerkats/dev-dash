@@ -204,6 +204,11 @@ ul.col-list p {
             transform: translateY(240px);
 }
 
+.user-modal-error {
+    color: darkred;
+    text-align: center;
+}
+
 .user-modal > form {
     background: rgb(36, 36, 36);
     border-radius: .5em;
