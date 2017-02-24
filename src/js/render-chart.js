@@ -2,7 +2,7 @@
  * If they all occur on the same day, the chart would just be 1 point! */
 
 /* jshint esversion:6 */
-/* globals $, console, document */
+/* globals jQuery, console, document */
 
 var RenderChart = (function ($) {
 
@@ -169,6 +169,22 @@ var RenderChart = (function ($) {
         return pointsArr.length === 1;
     }
     
+    /* generate formatted points array
+     *
+     * @params   [array]    points      [array of coordinate points]
+     * @params   [number]   xMultiple   [multiplier to scale coords]
+     * @params   [number]   yMultiple   [multiplier to scale coords]
+     * @returns  [array]   
+    */
+    function genFormattedPoints(points, xMultiple, yMultiple) {
+        return points.map(function(point, ind) {
+            return [
+                (ind * xMultiple) + xMargin,
+                (height - (point[1] * yMultiple)) - yMargin
+            ];
+        });
+    }
+    
     
     /* generate chart points
      *
@@ -188,12 +204,7 @@ var RenderChart = (function ($) {
             yMultiple = (height - yMargin - spacer) / chartYMax,
             
             // format values to align with chart extents
-            formattedPoints = points.map(function(point, ind) {
-                return [
-                    (ind * xMultiple) + xMargin,
-                    (height - (point[1] * yMultiple)) - yMargin
-                ];
-            });
+            formattedPoints = genFormattedPoints(points, xMultiple, yMultiple);
         
         // loop through points array appending circles to group
         formattedPoints.forEach(function (point, ind) {
@@ -249,12 +260,7 @@ var RenderChart = (function ($) {
             yMultiple = (height - yMargin - spacer) / chartYMax,
             
             // format values to align with chart extents
-            formattedPoints = points.map(function(point, ind) {
-                return [
-                    (ind * xMultiple) + xMargin,
-                    (height - (point[1] * yMultiple)) - yMargin
-                ];
-            });
+            formattedPoints = genFormattedPoints(points, xMultiple, yMultiple);
         
         // loop through points array appending lines to group
         for (i = 0; i < formattedPoints.length - 1; i += 1) {
@@ -293,13 +299,8 @@ var RenderChart = (function ($) {
             numAxisTicks,
             xPos, xValue, xMultiple,
             yPos, yValue, ySpacing,
-            maxYval,
             chartYMax = getChartYMax(points),
             i;
-        
-        maxYval = points.reduce(function (a, b) {
-            return Math.max(a, b[1]);
-        }, points[0][1]);
         
         // conditionally handle passed axis param
         if (axis === 'y') {
@@ -360,28 +361,14 @@ var RenderChart = (function ($) {
             for (i = 0; i < points.length; i += 1) {
                 
                 // for large datasets, only append every 10th date
-                if (points.length > 20) {
+                if (points.length > 20 && i % 10 === 0) {
                     
-                    if (i % 10 === 0) {
-                        // calculate y axis label values
-                        xValue = points[i][0];
+                    // calculate y axis label values
+                    xValue = points[i][0];
 
-                        // calculate y position
-                        xPos = i * xMultiple;
-
-                        // create new <text> element
-                        text = $(document.createElementNS(ns, 'text'));
-
-                        // add attributes to <text> element
-                        text
-                            .attr('x', (xPos + xMargin))
-                            .attr('y', (height - 5))
-                            .text(xValue);
-
-                        group
-                            .append(text);
-                    }
-                    
+                    // calculate y position
+                    xPos = i * xMultiple;
+                
                 } else {                
 
                     // calculate y axis label values
@@ -389,19 +376,18 @@ var RenderChart = (function ($) {
 
                     // calculate y position
                     xPos = i * xMultiple;
-
-                    // create new <text> element
-                    text = $(document.createElementNS(ns, 'text'));
-
-                    // add attributes to <text> element
-                    text
-                        .attr('x', (xPos + xMargin))
-                        .attr('y', (height - 5))
-                        .text(xValue);
-
-                    group
-                        .append(text);
+                    
                 }
+
+                // create new <text> element
+                text = $(document.createElementNS(ns, 'text'));
+
+                // add attributes to <text> element
+                text
+                    .attr('x', (xPos + xMargin))
+                    .attr('y', (height - 5))
+                    .text(xValue)
+                    .appendTo(group);
             }
             return group;
         }
