@@ -91,11 +91,7 @@ var RenderTable = (function ($) {
                         .text(`"${commit.message}"`);
 
                     $paragraph
-                        .append(`<span class="bolder">${evt.actor}</span> committed `)
-                        .append($a)
-                        .append(` on ${formatDate(evt.date)}: `)
-                        .append($paraSpan)
-                        .appendTo($listItem);
+                        .append(`<span class="bolder">${evt.actor}</span> committed `);
 
                 });
 
@@ -113,13 +109,15 @@ var RenderTable = (function ($) {
                     .text(`"${evt.payload.comment.body}"`);
 
                 $paragraph
-                    .append(`<span class="bolder">${evt.actor}</span> commented on `)
-                    .append($a)
-                    .append(` on ${formatDate(evt.date)}: `)
-                    .append($paraSpan)
-                    .appendTo($listItem);
+                    .append(`<span class="bolder">${evt.actor}</span> commented on `);
 
             }
+            
+            $paragraph
+                .append($a)
+                .append(` on ${formatDate(evt.date)}: `)
+                .append($paraSpan)
+                .appendTo($listItem);
             
             $listItem
                 .appendTo($list);
