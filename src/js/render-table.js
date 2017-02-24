@@ -9,6 +9,7 @@ var RenderTable = (function ($) {
     // cache DOM elements
     function cacheDom() {
         DOM.$tableContainer = $('.table-container');
+        
     }
     
     
@@ -46,42 +47,43 @@ var RenderTable = (function ($) {
     // render commit events
     function renderCommitEvents(es) {
 
-        // gets PushEvents & CommitCommentEvents
+        // receives PushEvent & CommitCommentEvent event types
 
         var $listContainer = $(document.createElement('div')),
             $column       = $(document.createElement('div')),
             $list         = $(document.createElement('ul'));
 
         es.forEach(function (evt) {
-
+            
             // console.log(evt);
+            
+            var $listItem  = $(document.createElement('li')),
+                $img       = $(document.createElement('img')),
+                $paragraph = $(document.createElement('p')),
+                $paraSpan  = $(document.createElement('span')),
+                $a         = $(document.createElement('a'));
+            
+            $a
+                .attr('target', '_blank');
 
             if (evt.type === 'PushEvent') {
 
                 // when it's a push event, extract the commits
                 evt.payload.commits.forEach(function (commit) {
 
-                    var $listItem  = $(document.createElement('li')),
-                        $img       = $(document.createElement('img')),
-                        $paragraph = $(document.createElement('p')),
-                        $paraSpan  = $(document.createElement('span')),
-                        $a         = $(document.createElement('a'));
-
                     // convert commit URL into regular github.com URL
                     // from: https://api.github.com/repos/{user}/{repo}/commits/{sha}
                     //   to: https://github.com/{user}/{repo}/commit/{sha}
                     var cleanUrl = (commit.url)
-                        // remove 'api.'
-                        .replace(/\/\/api./, '\/\/')
-                        // remove 'repos/'
-                        .replace(/\/repos\//, '\/')
-                        // replace 'commits' with 'commit'
-                        .replace(/commits/, 'commit');
+                        .replace(/\/\/api./, '\/\/')    // remove 'api.'
+                        .replace(/\/repos\//, '\/')     // remove 'repos/'
+                        .replace(/commits/, 'commit');  // singular 'commit'
 
-                    $img.attr('src', evt.avatar);
+                    $img
+                        .attr('src', evt.avatar)
+                        .appendTo($listItem);
 
                     $a
-                        .attr('target', '_blank')
                         .attr('href', cleanUrl)
                         .html(`<span class="bolder">${(commit.sha).slice(0,6)}</span>`);
 
@@ -92,29 +94,18 @@ var RenderTable = (function ($) {
                         .append(`<span class="bolder">${evt.actor}</span> committed `)
                         .append($a)
                         .append(` on ${formatDate(evt.date)}: `)
-                        .append($paraSpan);
-
-                    $listItem
-                        .append($img)
-                        .append($paragraph);
-
-                    $list
-                        .append($listItem);
+                        .append($paraSpan)
+                        .appendTo($listItem);
 
                 });
 
             } else { // else it's a comment
 
-                var $listItem  = $(document.createElement('li')),
-                    $img       = $(document.createElement('img')),
-                    $paragraph = $(document.createElement('p')),
-                    $paraSpan  = $(document.createElement('span')),
-                    $a         = $(document.createElement('a'));
-
-                $img.attr('src', evt.avatar);
+                $img
+                    .attr('src', evt.avatar)
+                    .appendTo($listItem);
 
                 $a
-                    .attr('target', '_blank')
                     .attr('href', evt.payload.comment.html_url)
                     .html(`<span class="bolder">${(evt.payload.comment.commit_id).slice(0,6)}</span>`);
 
@@ -125,32 +116,26 @@ var RenderTable = (function ($) {
                     .append(`<span class="bolder">${evt.actor}</span> commented on `)
                     .append($a)
                     .append(` on ${formatDate(evt.date)}: `)
-                    .append($paraSpan);
+                    .append($paraSpan)
+                    .appendTo($listItem);
 
-                $listItem
-                    .append($img)
-                    .append($paragraph);
-
-                $list
-                    .append($listItem);
             }
+            
+            $listItem
+                .appendTo($list);
 
         });
 
         $list
-            .addClass('col-list');
+            .addClass('col-list')
+            .appendTo($listContainer);
         
-        $listContainer
-            .append($list);
-
         $column
             .addClass('table-col')
             .append(`<h3>${es.length} Commit-Related Events</h3>`)
-            .append($listContainer);
-
-        DOM.$tableContainer
-            .append($column);
-
+            .append($listContainer)
+            .appendTo(DOM.$tableContainer);
+        
     }
 
 
@@ -172,7 +157,9 @@ var RenderTable = (function ($) {
                 $paragraph = $(document.createElement('p')),
                 $a         = $(document.createElement('a'));
 
-            $img.attr('src', evt.avatar);
+            $img
+                .attr('src', evt.avatar)
+                .appendTo($listItem);
 
             $a.attr('target', '_blank');
 
@@ -187,13 +174,6 @@ var RenderTable = (function ($) {
                     .append($a)
                     .append(` on ${formatDate(evt.date)}: "${evt.payload.issue.title}"`);
 
-                $listItem
-                    .append($img)
-                    .append($paragraph);
-
-                $list
-                    .append($listItem);
-
             } else if (evt.type === 'IssueCommentEvent') {
 
                 $a
@@ -205,13 +185,11 @@ var RenderTable = (function ($) {
                     .append($a)
                     .append(` on ${formatDate(evt.date)}: "${evt.payload.comment.body}"`);
 
-                $listItem
-                    .append($img)
-                    .append($paragraph);
-
-                $list
-                    .append($listItem);
             }
+            
+            $listItem
+                .append($paragraph)
+                .appendTo($list);
         });
 
         $list
@@ -220,10 +198,8 @@ var RenderTable = (function ($) {
         $column
             .addClass('table-col')
             .append(`<h3>${es.length} Todo-Related Events</h3>`)
-            .append($list);
-
-        DOM.$tableContainer
-            .append($column);
+            .append($list)
+            .appendTo(DOM.$tableContainer);
 
     }
 
@@ -231,8 +207,8 @@ var RenderTable = (function ($) {
     // render merge events
     function renderMergeEvents(es) {
 
-        // gets CreateEvent, PullRequestEvent, PullRequestReviewEvent
-        //   and PullRequestReviewCommentEvent
+        // receives CreateEvent, PullRequestEvent, PullRequestReviewEvent
+        //   and PullRequestReviewCommentEvent event types
 
         var $column = $(document.createElement('div')),
             $list   = $(document.createElement('ul')),
@@ -263,24 +239,14 @@ var RenderTable = (function ($) {
                         formatDate(evt.date)
                     ].join(' '));
 
-                $listItem
-                    .append($img)
-                    .append($paragraph);
-
-                $list
-                    .append($listItem);
-
             } else if (evt.type === 'PullRequestEvent') {
 
                 // from: https://api.github.com/repos/belcurv/meerkat_momentum/pulls/11
                 //   to: https://github.com/belcurv/meerkat_momentum/pull/11
                 cleanUrl = (evt.payload.pull_request.url)
-                    // remove 'api.'
-                    .replace(/\/\/api./, '\/\/')
-                    // remove 'repos/'
-                    .replace(/\/repos\//, '\/')
-                    // replace 'pulls' with 'pull'
-                    .replace(/pulls/, 'pull');
+                    .replace(/\/\/api./, '\/\/')  // remove 'api.'
+                    .replace(/\/repos\//, '\/')   // remove 'repos/'
+                    .replace(/pulls/, 'pull');    // singular 'pull'
 
                 $a
                     .attr('href', cleanUrl)
@@ -291,13 +257,6 @@ var RenderTable = (function ($) {
                     .append(` ${evt.payload.action} `)
                     .append($a)
                     .append(` on ${formatDate(evt.date)}`);
-
-                $listItem
-                    .append($img)
-                    .append($paragraph);
-
-                $list
-                    .append($listItem);
 
             } else if (evt.type === 'PullRequestReviewEvent') {
 
@@ -314,13 +273,6 @@ var RenderTable = (function ($) {
                     .append($a)
                     .append(' on' + formatDate(evt.date));
 
-                $listItem
-                    .append($img)
-                    .append($paragraph);
-
-                $list
-                    .append($listItem);
-
             } else if (evt.type === 'PullRequestReviewCommentEvent') {
 
                 $a
@@ -336,13 +288,12 @@ var RenderTable = (function ($) {
                     .append($a)
                     .append(' on' + formatDate(evt.date));
 
-                $listItem
-                    .append($img)
-                    .append($paragraph);
-
-                $list
-                    .append($listItem);
             }
+            
+            $listItem
+                .append($img)
+                .append($paragraph)
+                .appendTo($list);
 
         });
 
@@ -352,11 +303,9 @@ var RenderTable = (function ($) {
         $column
             .addClass('table-col')
             .append(`<h3>${es.length} Merge-Related Events</h3>`)
-            .append($list);
-
-        DOM.$tableContainer
-            .append($column);
-
+            .append($list)
+            .appendTo(DOM.$tableContainer);
+        
     }
     
     
