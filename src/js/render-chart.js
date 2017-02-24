@@ -360,34 +360,35 @@ var RenderChart = (function ($) {
             // and append each of them to our <g> group
             for (i = 0; i < points.length; i += 1) {
                 
-                // for large datasets, only append every 10th date
-                if (points.length > 20 && i % 10 === 0) {
-                    
-                    // calculate y axis label values
-                    xValue = points[i][0];
-
-                    // calculate y position
-                    xPos = i * xMultiple;
-                
-                } else {                
-
-                    // calculate y axis label values
-                    xValue = points[i][0];
-
-                    // calculate y position
-                    xPos = i * xMultiple;
-                    
-                }
-
-                // create new <text> element
                 text = $(document.createElementNS(ns, 'text'));
+                
+                // calculate y axis label values
+                xValue = points[i][0];
 
+                // calculate y position
+                xPos = i * xMultiple;
+                
                 // add attributes to <text> element
                 text
                     .attr('x', (xPos + xMargin))
                     .attr('y', (height - 5))
-                    .text(xValue)
-                    .appendTo(group);
+                    .text(xValue);
+                
+                // for large datasets, only append every 10th date
+                if (points.length > 20) {
+                    
+                    if (i === 0 || i % 10 === 0 || i === (points.length - 1)) {
+                        text.appendTo(group);
+                    }
+                    
+                } else {
+
+                    text.appendTo(group);
+                    
+                }
+                
+                console.log(xValue);
+
             }
             return group;
         }
