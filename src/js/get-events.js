@@ -1,5 +1,5 @@
 /* jshint esversion:6 */
-/* globals jQuery, document, console, RenderTable, RenderChart */
+/* globals jQuery, document, RenderTable, RenderChart */
 
 var HitApi = (function ($) {
 
@@ -48,37 +48,40 @@ var HitApi = (function ($) {
                            'CommitCommentEvent'
                           ],
             
-            todoTypes = ['IssuesEvent',
-                         'IssueCommentEvent',
-                         'ProjectEvent',
-                         'ProjectCardEvent',
-                         'ProjectColumnEvent'
-                        ],
+            todoTypes   = ['IssuesEvent',
+                           'IssueCommentEvent',
+                           'ProjectEvent',
+                           'ProjectCardEvent',
+                           'ProjectColumnEvent'
+                          ],
             
-            mergeTypes = ['CreateEvent',
-                          'PullRequestEvent',
-                          'PullRequestReviewEvent',
-                          'PullRequestReviewCommentEvent'
-                         ],
+            mergeTypes  = ['CreateEvent',
+                           'PullRequestEvent',
+                           'PullRequestReviewEvent',
+                           'PullRequestReviewCommentEvent'
+                          ],
             
-            // create array of commit-related events
-            commitEvents = response
-                .filter((e) => commitTypes.indexOf(e.type) !== -1)
-                .map(prepareEvents),
-
-            // create array of todo-related events
-            todoEvents = response
-                .filter((e) => todoTypes.indexOf(e.type) !== -1)
-                .map(prepareEvents),
-
-            // create build array of merge-related events
-            mergeEvents = response
-                .filter((e) => mergeTypes.indexOf(e.type) !== -1)
-                .map(prepareEvents);
+            // create arrays of related event types
+            commitEvents = filterRes(response, commitTypes),
+            todoEvents   = filterRes(response, todoTypes),
+            mergeEvents  = filterRes(response, mergeTypes);
         
         // call renderers
         RenderTable.render(commitEvents, todoEvents, mergeEvents);
         RenderChart.render(response.map(prepareEvents));
+    }
+    
+    
+    /* filter responses by event type
+     *
+     * @params   [array]  res    [the whole JSON response array]
+     * @params   [array]  types  [the specific event types to filter]
+     * @returns  [array]         [filtered array of events]
+    */
+    function filterRes(res, types) {
+        return res
+            .filter((e) => types.indexOf(e.type) !== -1)
+            .map(prepareEvents);
     }
     
     
