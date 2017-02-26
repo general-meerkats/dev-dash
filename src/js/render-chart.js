@@ -387,7 +387,7 @@ var RenderChart = (function ($) {
                     
                 }
                 
-                console.log(xValue);
+                // console.log(xValue);
 
             }
             return group;
