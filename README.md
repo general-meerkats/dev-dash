@@ -2,6 +2,8 @@
 
 ###By The General Meerkats
 
+[![Code Climate](https://codeclimate.com/github/general-meerkats/dev-dash/badges/gpa.svg)](https://codeclimate.com/github/general-meerkats/dev-dash)
+
 Demo: https://general-meerkats.github.io/dev-dash/
 
 **dev-dash** is a Chrome browser new-tab override that presents a brief dashboard view of a selected GitHub repository.  It installs as a Chrome browser extension and once installed, displays **dev-dash** whenever you open a new tab instead of Chrome's traditional new tab page.
