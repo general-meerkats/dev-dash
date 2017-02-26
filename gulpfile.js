@@ -18,7 +18,7 @@ var gulp = require('gulp'),
         'src/js/render-chart.js',
         'src/js/repo-select.js',
         'src/js/backgrounds.js',
-        'src/js/app.js',
+        'src/js/app.js'
     ];
 
 
