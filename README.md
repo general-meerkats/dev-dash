@@ -12,7 +12,7 @@ https://chrome.google.com/webstore/detail/dev-dash/dgkmjidcaelocfmnhlmeimmbaljgj
 
 There's no back-end.  It persists input data to your browser's local storage.  There's currently no way to clear that local storage from within the app, so make sure you spell you name right on 1st load! :smiley:  You can clear the app's data from local storage manually with this console command: `LS.clearData()`
 
-**What's the point of this?** It's designed to make checking repository activity more efficient.  You may be participating in the Chingu cohorts with a project team on a tight schedule, frequently pushing _a lot_ of code to GitHub. Pushes, comments, PR's, etc.  Instead of going to GitHub and sifting through histories, **dev-dash** shows you all the relevant recent events in a single view whenever you launch Chrome or open a new tab.  It looks like this:
+**What's the point of this?** It's designed to make checking repository activity more efficient.  You may be participating in the [Chingu cohorts](https://tropicalchancer.github.io/projectus/) with a project team on a tight schedule, frequently pushing _a lot_ of events to GitHub: pushing code, posting comments, opening issues, PR's, etc.  Instead of going to GitHub and sifting through histories, **dev-dash** shows you all the relevant recent events in a single view whenever you launch Chrome or open a new tab.  It looks like this:
 
 ![alt text](https://discourse-user-assets.s3.amazonaws.com/original/3X/4/4/443ca4e6e9cb2dcefac42996818d1cb35b7789ab.png "Screenshot 1")
 
