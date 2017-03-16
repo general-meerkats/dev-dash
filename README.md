@@ -1,6 +1,6 @@
-##Dev Dash
+## Dev Dash
 
-###By The General Meerkats
+### By The General Meerkats
 
 [![Code Climate](https://codeclimate.com/github/general-meerkats/dev-dash/badges/gpa.svg)](https://codeclimate.com/github/general-meerkats/dev-dash)
 
